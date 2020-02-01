@@ -28,8 +28,7 @@
               type="password"
               id = "password"
               placeholder="Enter password"
-              v.model.lazy = "userData.password">
-              <p>{{userData.password}}</p>
+              v-model.lazy = "userData.password">
     </div>
     <div class = "Checkbox">
       <label for="checkbox">
@@ -37,11 +36,25 @@
               class = "input2"
               type="checkbox"
               id = "checkbox"
-              v-model = "checked">Remember me</label>
+              v-model = "checked"
+              @click = "checking">Remember me</label>
         <span>Forgot <a :href= "link">password?</a> </span>
     </div>
+    <button
+            class ="btn"
+            @click.prevent = "submitted" >Submit
+    </button>
+    <p>{{title}}</p>
+
+    <i class="fab fa-twitter-square" ></i>
+      
     </form>
-   
+   <div v-if ="isSubmitted">
+      <h4>Your data</h4>
+      <p>Name : {{userData.name}}</p>
+      <p>Mail : {{userData.email}}</p>
+      <p>Password : {{userData.password}}</p>
+    </div>
   </div>
 </template>
 
@@ -55,7 +68,18 @@ export default {
         email:'',
         password:''
       },
-      link:"#"
+      link:"#",
+      isSubmitted:false,
+      isChecked:false,
+      title:"Or Sign Up Using"
+    }
+  },
+  methods:{
+    submitted(){
+      this.isSubmitted = true;
+    },
+    checking(){
+      this.isChecked = true;
     }
   }
 }
@@ -113,4 +137,17 @@ margin-right:10%;
 font-size:0.8em;
 align-items:center;
 }
+.btn{
+  background-color:#DA7338;
+  width:96%;
+  border-radius:10px;
+  margin-top:30px;
+  margin-left:1%;
+  text-align:center;
+  padding:7px;
+  color:white;
+  font-size:20px;
+}
+
+
 </style>
